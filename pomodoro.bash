@@ -8,31 +8,6 @@
 filename=$(dirname $0)"/.time-reports/`date '+%Y-%m'`.arff"
 date=`date '+%Y-%m-%d'`
 
-if [ "$1" == "timesheet" ]
-then
-    cat $filename | awk -F, '
-    {
-        if ($2 == "'$2'") {
-            data[$1][NR] = $4;
-        }
-    }
-    END{
-        for (date in data) {
-            tmp_date = date;
-            gsub("\"", "", tmp_date);
-            print tmp_date;
-            for (x in data[date]) {
-                tmp_desc = data[date][x];
-                gsub("\"", "", tmp_desc);
-                print "  " tmp_desc;
-            }
-            print ""
-        }
-    }
-    '
-    exit 0
-fi
-
 if [ -z "$2" ]
 then
     counter=0
